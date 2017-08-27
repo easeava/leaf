@@ -5,8 +5,39 @@ namespace Ty\Leaf;
 class PgNotify
 {
 
-	public function warning()
+	public function default($msg = '')
 	{
-		return 'notify warning';
+		
 	}
+
+	public function primary($msg = '')
+	{
+
+	}
+
+	public function complete($msg = '')
+	{
+
+	}
+
+	public function success($msg = '')
+	{
+
+	}
+
+	public function danger($msg = '')
+	{
+
+	}
+
+	public function warning($msg = '')
+	{
+
+	}
+
+	public function white($msg = '')
+	{
+
+	}
+
 }
