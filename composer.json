@@ -10,7 +10,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "TY\\Leaf\\": "src/"
+            "Ty\\Leaf\\": "src/"
         },
         "files": [
         ]
