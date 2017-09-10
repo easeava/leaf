@@ -1,5 +1,5 @@
 {
-    "name": "toyoung/leaf",
+    "name": "gayly/leaf",
     "description": "cms console",
     "authors": [
         {
@@ -10,7 +10,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "Ty\\Leaf\\": "src/"
+            "Gayly\\Leaf\\": "src/"
         },
         "files": [
         ]
