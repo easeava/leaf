@@ -14,5 +14,16 @@
         },
         "files": [
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gayly\\Leaf\\LeafServiceProvider"
+            ],
+            "aliases": {
+                "Leaf": "Gayly\\Leaf\\Facades\\Leaf"
+            }
+
+        }
     }
 }
