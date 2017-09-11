@@ -10,7 +10,7 @@ class InstallCommand extends Command
 
 	protected $name			=	'leaf:install';
 
-	protected $description	=	'install leaf console package';
+	protected $description	=	'Install leaf console package';
 
 	protected $directory 	=	'';
 
@@ -31,6 +31,8 @@ class InstallCommand extends Command
 
 	public function handle()
 	{
+		echo $this->laravel->getNamespace();
+
 		// 初始化安装数据表
 		$this->initInstallDatabase();
 
@@ -88,7 +90,7 @@ class InstallCommand extends Command
 
 	protected function getStub($name)
 	{
-		return $this->files->get(__DIR__ . "/stub/{$name}.stub");
+		return $this->files->get(__DIR__ . "/stubs/{$name}.stub");
 	}
 
 	/**
