@@ -1,6 +1,6 @@
 <?php
 
-namespace Namespace;
+namespace DummyNamespace;
 
 use App\Http\Controllers\Controller;
 
