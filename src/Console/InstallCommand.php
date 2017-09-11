@@ -65,8 +65,6 @@ class InstallCommand extends Command
 		$dashController = $this->directory . '/Controllers/DashController.php';
 		$contents = $this->getStub('DashController');
 
-		echo config('admin.route.namespace');
-		die;
 		$this->files->put(
 			$dashController,
 			str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
