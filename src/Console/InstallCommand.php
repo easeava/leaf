@@ -10,7 +10,7 @@ class InstallCommand extends Command
 
 	protected $name			=	'leaf:install';
 
-	protected $description	=	'安装Leaf扩展包';
+	protected $description	=	'install leaf console package';
 
 	protected $directory 	=	'';
 
