@@ -4,7 +4,7 @@ namespace Namespace;
 
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class DashController extends Controller
 {
     public function index()
     {

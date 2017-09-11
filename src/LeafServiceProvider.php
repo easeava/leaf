@@ -36,7 +36,7 @@ class LeafServiceProvider extends ServiceProvider
 	{
 		$this->loadViewsFrom(__DIR__ . '/../resource/views', 'leaf');
 
-		$this->registerRoutesFile();
+		$this->registerAuthRoutes();
 
 		if ($this->app->runningInConsole()) {
 			$this->publishes([__DIR__ . '/../config' => config_path()], 'leaf_config');
@@ -84,16 +84,12 @@ class LeafServiceProvider extends ServiceProvider
 			$router->post('login', 'Auth\LoginController@login');
 			$router->get('logout', 'Auth\LoginController@logout');
 		});
-	}
 
-	/**
-	 * register route file
-	 * @return [type] [description]
-	 */
-	protected function registerRoutesFile()
-	{
 		if (file_exists($routes = admin_path('routes.php'))) {
-			$this->loadRoutesFrom($routes);
+			Route::prefix($attributes['prefix'])
+	             ->middleware($attributes['middleware'])
+	             ->namespace(config('admin.route.namespace'))
+	             ->group(admin_path('routes.php'));
 		}
 	}
 
