@@ -5,7 +5,7 @@ namespace Gayly\Leaf\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Authenticated
+class Authenticate
 {
     /**
      * Handle an incoming request.
