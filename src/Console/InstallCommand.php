@@ -57,6 +57,7 @@ class InstallCommand extends Command
 		$this->makeDirectory($this->directory, true);
 
 		$this->createDashController();
+		$this->createRoutesFile();
 	}
 
 	protected function createDashController()
@@ -70,6 +71,19 @@ class InstallCommand extends Command
 		);
 
 		$this->info("DashController file was created: " . str_replace(base_path(), '', $dashController));
+	}
+
+	protected function createRoutesFile()
+	{
+		$routes = $this->directory . '/routes.php';
+		$contents = $this->getStub('routes');
+
+		$this->files->put(
+			$routes,
+			$contents
+		);
+
+		$this->info("Routes file was created:" . str_replace(base_path(), $routes));
 	}
 
 	protected function getStub($name)

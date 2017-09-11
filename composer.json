@@ -13,6 +13,7 @@
             "Gayly\\Leaf\\": "src/"
         },
         "files": [
+            "src/helpers.php"
         ]
     },
     "extra": {
