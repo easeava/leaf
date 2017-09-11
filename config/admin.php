@@ -5,49 +5,49 @@ return [
 	/**
 	 * system name
 	 */
-	'name'			=>		'Leaf Console',
+	'name'	=>	'Leaf Console',
 
 	/**
 	 * html title
 	 */
-	'title'			=>		'Leaf Console',
+	'title'	=>	'Leaf Console',
 
 	/**
 	 * version
 	 */
-	'version'		=>		'v-beta-0.0.1',
+	'version'	=>	'v-beta-0.0.1',
 
-	'directory'		=>		app_path('Admin'),
+	'directory'	=>	app_path('Admin'),
 
 	/**
 	 * route configure
 	 */
-	'route'		=>		[
-		'prefix'		=>		'admin',
-		'namespace'		=>		'App\\Admin\\Controllers',
-		'middleware'	=>		['web', 'leaf'],
+	'route'	=>	[
+		'prefix'	=>	'admin',
+		'namespace'	=>	'App\\Admin\\Controllers',
+		'middleware'=>	['web', 'leaf'],
 	],
 
 	/**
 	 * https
 	 */
-	'secure'	=>		false,
+	'secure'	=>	false,
 
 	/**
 	 * auth guards setting
 	 */
-	'auth'		=>		[
-		'guards' => [
-			'admin' => [
-				'driver' => 'session',
-				'provider' => 'admins',
+	'auth'	=>	[
+		'guards'	=>	[
+			'admin' =>	[
+				'driver'	=>	'session',
+				'provider'	=>	'admins',
 			],
 		],
 
-        'providers' => [
-            'admins' => [
-                'driver' => 'eloquent',
-                'model'  => Gayly\Leaf\Auth\Models\User::class,
+        'providers'	=>	[
+            'admins'	=>	[
+                'driver'	=>	'eloquent',
+                'model'		=> 	Gayly\Leaf\Auth\Models\User::class,
             ],
         ],
 	],
@@ -55,14 +55,14 @@ return [
 	/**
 	 * database setting
 	 */
-	'database'	=>		[
-		'users_table'			=>	'admin_users',
+	'database'	=>	[
+		'users_table'	=>	'admin_users',
 
-		'roles_table'			=>	'admin_roles',
+		'roles_table'	=>	'admin_roles',
 
-		'permissions_table'		=>	'admin_permissions',
+		'permissions_table'	=>	'admin_permissions',
 
-		'menus_table'			=>	'admin_menus',
+		'menus_table'	=>	'admin_menus',
 
 		'operation_log_table'    => 'admin_operation_log',
 		'user_permissions_table' => 'admin_user_permissions',
