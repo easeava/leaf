@@ -36,11 +36,13 @@ class InstallCommand extends Command
 
 		// 初始化创建后台目录
 		$this->initInstallAdminDirectory();
+
+		$this->info("Leaf Console Installed");
 	}
 
 	protected function initInstallDatabase()
 	{
-		// $this->call('migrate');
+		$this->call('migrate');
 	}
 
 	protected function initInstallAdminDirectory()
