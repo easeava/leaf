@@ -14,7 +14,7 @@ class InstallCommand extends Command
 
 	protected $directory 	=	'';
 
-	protected $file;
+	protected $files;
 
 	/**
      * Create a new controller creator command instance.
@@ -65,6 +65,8 @@ class InstallCommand extends Command
 		$dashController = $this->directory . '/Controllers/DashController.php';
 		$contents = $this->getStub('DashController');
 
+		echo config('admin.route.namespace');
+		die;
 		$this->files->put(
 			$dashController,
 			str_replace('DummyNamespace', config('admin.route.namespace'), $contents)

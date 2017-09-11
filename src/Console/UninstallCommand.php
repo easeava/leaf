@@ -3,9 +3,25 @@
 namespace Gayly\Leaf\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class UninstallCommand extends Command
 {
+    protected $files;
+
+	/**
+     * Create a new controller creator command instance.
+     *
+     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @return void
+     */
+    public function __construct(Filesystem $files)
+    {
+        parent::__construct();
+
+        $this->files = $files;
+    }
+
     /**
      * The console command name.
      *
@@ -43,8 +59,8 @@ class UninstallCommand extends Command
      */
     protected function removeFilesAndDirectories()
     {
-        $this->laravel['files']->deleteDirectory(config('admin.directory'));
-        $this->laravel['files']->deleteDirectory(public_path('vendor/'));
-        $this->laravel['files']->delete(config_path('admin.php'));
+        $this->files->deleteDirectory(config('admin.directory'));
+        $this->files->deleteDirectory(public_path('vendor/'));
+        $this->files->delete(config_path('admin.php'));
     }
 }
