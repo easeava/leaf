@@ -5,6 +5,11 @@ use Illuminate\Support\ServiceProvider;
 
 class LeafServiceProvider extends ServiceProvider
 {
+
+	protected $commands		=	[
+		'Gayly\Leaf\Console\InstallCommand',
+	];
+
 	/**
 	 * Bootstrap any application services.
 	 *
@@ -12,7 +17,14 @@ class LeafServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		//
+		$this->loadViewsFrom(__DIR__ . '/../resource/views', 'leaf');
+
+		if ($this->app->runningInConsole()) {
+			$this->publishes([__DIR__ . '/../config' => config_path()], 'leaf_config');
+			$this->publishes([__DIR__ . '/../resource/lang' => resource_path('lang')], 'leaf_lang');
+			$this->publishes([__DIR__ . '/../resource/assets' => public_path('vendor/leaf')], 'leaf-assets');
+			$this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'leaf_migrations');
+		}
 	}
 
 	/**
@@ -22,6 +34,7 @@ class LeafServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		//
+
+		$this->commands($this->commands);
 	}
 }

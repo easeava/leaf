@@ -2,11 +2,14 @@
 
 namespace Gayly\Leaf;
 
+use Closure;
+use Gayly\Leaf\Layout\Content;
+
 class Leaf
 {
 
-	public function content()
+	public function content(Closure $callable)
 	{
-		return 'content';
+		return new Content($callable);
 	}
 }
