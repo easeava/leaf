@@ -23,7 +23,7 @@ class MakeCommand extends ControllerMakeCommand
     {
 		$directory = config('admin.directory');
 		$namespace = ucfirst(basename($directory));
-        return $rootNamespace . $namespace . '\Http\Controllers';
+        return $rootNamespace . '\\' . $namespace . '\Controllers';
     }
 
 }

@@ -10,6 +10,7 @@ class LeafServiceProvider extends ServiceProvider
 	protected $commands		=	[
 		'Gayly\Leaf\Console\InstallCommand',
 		'Gayly\Leaf\Console\MakeCommand',
+		'Gayly\Leaf\Console\UninstallCommand',
 	];
 
 	protected $routeMiddleware	=	[

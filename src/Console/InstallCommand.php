@@ -31,8 +31,6 @@ class InstallCommand extends Command
 
 	public function handle()
 	{
-		echo $this->laravel->getNamespace();
-
 		// 初始化安装数据表
 		$this->initInstallDatabase();
 
@@ -85,7 +83,7 @@ class InstallCommand extends Command
 			$contents
 		);
 
-		$this->info("Routes file was created:" . str_replace(base_path(), $routes));
+		$this->info("Routes file was created:" . str_replace(base_path(), '', $routes));
 	}
 
 	protected function getStub($name)
