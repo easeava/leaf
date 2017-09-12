@@ -18,9 +18,9 @@ class CreateLeafTables extends Migration
             $table->string('username', 190)->unique();
             $table->string('email', 60)->unique();
             $table->string('password', 60);
-            $table->string('name');
-            $table->string('avatar')->nullable();
-            $table->integer('mobile', 20);
+            $table->string('name')->nullable()->index();
+            $table->string('avatar')->nullable()->index();
+            $table->string('mobile', 20)->nullable();
             $table->string('wechat', 30)->nullable();
             $table->string('qq', 20)->nullable();
             $table->string('status', 10)->default('normal')->comment('normal: 正常, disable: 禁用');
