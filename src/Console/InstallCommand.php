@@ -7,16 +7,15 @@ use Illuminate\Filesystem\Filesystem;
 
 class InstallCommand extends Command
 {
+    protected $name            =    'leaf:install';
 
-	protected $name			=	'leaf:install';
+    protected $description    =    'Install leaf console package';
 
-	protected $description	=	'Install leaf console package';
+    protected $directory    =    '';
 
-	protected $directory 	=	'';
+    protected $files;
 
-	protected $files;
-
-	/**
+    /**
      * Create a new controller creator command instance.
      *
      * @param  \Illuminate\Filesystem\Filesystem  $files
@@ -29,91 +28,90 @@ class InstallCommand extends Command
         $this->files = $files;
     }
 
-	public function handle()
-	{
-		// 初始化安装数据表
-		$this->initInstallDatabase();
+    public function handle()
+    {
+        // 初始化安装数据表
+        $this->initInstallDatabase();
 
-		// 初始化创建后台目录
-		$this->initInstallAdminDirectory();
+        // 初始化创建后台目录
+        $this->initInstallAdminDirectory();
 
-		$this->info("Leaf Console Installed");
-	}
+        $this->info("Leaf Console Installed");
+    }
 
-	protected function initInstallDatabase()
-	{
-		$this->call('migrate');
-	}
+    protected function initInstallDatabase()
+    {
+        $this->call('migrate');
+    }
 
-	protected function initInstallAdminDirectory()
-	{
-		$this->directory = config('admin.directory');
+    protected function initInstallAdminDirectory()
+    {
+        $this->directory = config('admin.directory');
 
-		if ($this->alreadyExists($this->directory)) {
-			$this->error($this->directory . ' ' . trans('command.exists_directory'));
-			return false;
-		}
+        if ($this->alreadyExists($this->directory)) {
+            $this->error($this->directory . ' ' . trans('command.exists_directory'));
+            return false;
+        }
 
-		$this->makeDirectory($this->directory, true);
+        $this->makeDirectory($this->directory, true);
 
-		$this->createDashController();
-		$this->createRoutesFile();
-	}
+        $this->createDashController();
+        $this->createRoutesFile();
+    }
 
-	protected function createDashController()
-	{
-		$dashController = $this->directory . '/Controllers/DashController.php';
-		$contents = $this->getStub('DashController');
+    protected function createDashController()
+    {
+        $dashController = $this->directory . '/Controllers/DashController.php';
+        $contents = $this->getStub('DashController');
 
-		$this->files->put(
-			$dashController,
-			str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
-		);
+        $this->files->put(
+            $dashController,
+            str_replace('DummyNamespace', config('admin.route.namespace'), $contents)
+        );
 
-		$this->info("DashController file was created: " . str_replace(base_path(), '', $dashController));
-	}
+        $this->info("DashController file was created: " . str_replace(base_path(), '', $dashController));
+    }
 
-	protected function createRoutesFile()
-	{
-		$routes = $this->directory . '/routes.php';
-		$contents = $this->getStub('routes');
+    protected function createRoutesFile()
+    {
+        $routes = $this->directory . '/routes.php';
+        $contents = $this->getStub('routes');
 
-		$this->files->put(
-			$routes,
-			$contents
-		);
+        $this->files->put(
+            $routes,
+            $contents
+        );
 
-		$this->info("Routes file was created:" . str_replace(base_path(), '', $routes));
-	}
+        $this->info("Routes file was created:" . str_replace(base_path(), '', $routes));
+    }
 
-	protected function getStub($name)
-	{
-		return $this->files->get(__DIR__ . "/stubs/{$name}.stub");
-	}
+    protected function getStub($name)
+    {
+        return $this->files->get(__DIR__ . "/stubs/{$name}.stub");
+    }
 
-	/**
-	 * already exists
-	 * @param  [type] $directory [description]
-	 * @return [type]            [description]
-	 */
+    /**
+     * already exists
+     * @param  [type] $directory [description]
+     * @return [type]            [description]
+     */
     protected function alreadyExists($directory)
     {
         return $this->files->exists($directory);
     }
 
-	/**
-	 * build directory
-	 * @param  [type] $path [description]
-	 * @return [type]       [description]
-	 */
+    /**
+     * build directory
+     * @param  [type] $path [description]
+     * @return [type]       [description]
+     */
     protected function makeDirectory($path, $controller = false)
     {
         if (!$this->files->isDirectory($path)) {
             $this->files->makeDirectory($path, 0755, true, true);
-			$controller && $this->files->makeDirectory($path.'/Controllers', 0755, true, true);
+            $controller && $this->files->makeDirectory($path.'/Controllers', 0755, true, true);
         }
 
         return $path;
     }
-
 }

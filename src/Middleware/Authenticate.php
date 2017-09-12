@@ -15,9 +15,9 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = 'admin')
     {
-        if (Auth::guard('admin')->guest()) {
+        if (Auth::guard($guard)->guest()) {
             return redirect(config('admin.route.prefix') . '/login');
         }
 

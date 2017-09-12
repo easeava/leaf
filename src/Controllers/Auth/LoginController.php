@@ -2,12 +2,13 @@
 
 namespace Gayly\Leaf\Controllers\Auth;
 
-use Illuminate\Routing\Controller;
+use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-	/*
+    /*
     |--------------------------------------------------------------------------
     | Login Controller
     |--------------------------------------------------------------------------
@@ -34,21 +35,22 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-		$this->redirectTo = '';
+        $this->redirectTo = admin_url('login');
         $this->middleware('leaf.redirect')->except('logout');
     }
 
-	/**
+    /**
      * Show the application's login form.
      *
      * @return \Illuminate\Http\Response
      */
     public function showLoginForm()
     {
-        return view('leaf::login');
+        dd(config('database'));
+        return view('leaf::auth.login');
     }
 
-	/**
+    /**
      * Get the login username to be used by the controller.
      *
      * @return string
@@ -82,5 +84,4 @@ class LoginController extends Controller
     {
         return Auth::guard('admin');
     }
-
 }

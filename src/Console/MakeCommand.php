@@ -8,12 +8,11 @@ use Symfony\Component\Console\Input\InputOption;
 
 class MakeCommand extends ControllerMakeCommand
 {
+    protected $name = 'leaf:make';
 
-	protected $name = 'leaf:make';
+    protected $description = 'Make empty admin controller';
 
-	protected $description = 'Make empty admin controller';
-
-	/**
+    /**
      * Get the default namespace for the class.
      *
      * @param  string  $rootNamespace
@@ -21,9 +20,8 @@ class MakeCommand extends ControllerMakeCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-		$directory = config('admin.directory');
-		$namespace = ucfirst(basename($directory));
+        $directory = config('admin.directory');
+        $namespace = ucfirst(basename($directory));
         return $rootNamespace . '\\' . $namespace . '\Controllers';
     }
-
 }

@@ -9,7 +9,7 @@ class UninstallCommand extends Command
 {
     protected $files;
 
-	/**
+    /**
      * Create a new controller creator command instance.
      *
      * @param  \Illuminate\Filesystem\Filesystem  $files

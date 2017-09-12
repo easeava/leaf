@@ -6,9 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 
 class Column implements Buildable
 {
-
-	public function build()
-	{
-		
-	}
+    public function build()
+    {
+    }
 }

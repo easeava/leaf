@@ -1,113 +1,124 @@
 <?php
 
 namespace Gayly\Leaf;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class LeafServiceProvider extends ServiceProvider
 {
+    protected $commands        =    [
+        'Gayly\Leaf\Console\InstallCommand',
+        'Gayly\Leaf\Console\MakeCommand',
+        'Gayly\Leaf\Console\UninstallCommand',
+    ];
 
-	protected $commands		=	[
-		'Gayly\Leaf\Console\InstallCommand',
-		'Gayly\Leaf\Console\MakeCommand',
-		'Gayly\Leaf\Console\UninstallCommand',
-	];
+    protected $routeMiddleware    =    [
+        'leaf.redirect'        =>        \Gayly\Leaf\Middleware\Redirect::class,
+        'leaf.auth'            =>        \Gayly\Leaf\Middleware\Authenticate::class,
+        'leaf.log'             =>        \Gayly\Leaf\Middleware\LogOperation::class,
+        'leaf.permission'    =>        \Gayly\Leaf\Middleware\Permission::class,
+    ];
 
-	protected $routeMiddleware	=	[
-		'leaf.redirect'		=>		\Gayly\Leaf\Middleware\Redirect::class,
-		'leaf.auth'			=>		\Gayly\Leaf\Middleware\Authenticate::class,
-		'leaf.log'         	=> 		\Gayly\Leaf\Middleware\LogOperation::class,
-        'leaf.permission'  	=> 		\Gayly\Leaf\Middleware\Permission::class,
-	];
-
-	protected $middlewareGroups		=	[
-		'leaf' => [
+    protected $middlewareGroups        =    [
+        'leaf' => [
             'leaf.auth',
             'leaf.log',
             'leaf.permission',
         ],
-	];
+    ];
 
-	/**
-	 * Bootstrap any application services.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		$this->loadViewsFrom(__DIR__ . '/../resource/views', 'leaf');
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resource/views', 'leaf');
 
-		$this->registerAuthRoutes();
+        $this->registerAuthRoutes();
 
-		if ($this->app->runningInConsole()) {
-			$this->publishes([__DIR__ . '/../config' => config_path()], 'leaf_config');
-			$this->publishes([__DIR__ . '/../resource/lang' => resource_path('lang')], 'leaf_lang');
-			$this->publishes([__DIR__ . '/../resource/assets' => public_path('vendor/leaf')], 'leaf-assets');
-			$this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'leaf_migrations');
-		}
-	}
+        if ($this->app->runningInConsole()) {
+            $this->publishes([__DIR__ . '/../config' => config_path()], 'leaf_config');
+            $this->publishes([__DIR__ . '/../resource/lang' => resource_path('lang')], 'leaf_lang');
+            $this->publishes([__DIR__ . '/../resource/assets' => public_path('vendor/leaf')], 'leaf-assets');
+            $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'leaf_migrations');
+        }
+    }
 
-	/**
-	 * Register any application services.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->mergerAuthConfig();
-		$this->registerMiddlewares();
-		$this->commands($this->commands);
-	}
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergerAuthConfig();
+        $this->registerMiddlewares();
+        $this->mergeDatabaseConfig();
+        $this->commands($this->commands);
+    }
 
-	/**
-	 * merge auth config
-	 * @return [type] [description]
-	 */
-	protected function mergerAuthConfig()
-	{
-		config(array_dot(config('admin.auth', []), 'auth.'));
-	}
+    /**
+     * merge auth config
+     * @return [type] [description]
+     */
+    protected function mergerAuthConfig()
+    {
+        config(array_dot(config('admin.auth', []), 'auth.'));
+    }
 
-	/**
-	 * register auth route
-	 * @return [type] [description]
-	 */
-	protected function registerAuthRoutes()
-	{
-		$attributes		=	[
-			'prefix'		=>	config('admin.route.prefix'),
-			'namespace'		=>	'Gayly\\Leaf\\Controllers',
-			'middleware'	=> 'web',
-		];
+    /**
+     * merge database config
+     * @return [type] [description]
+     */
+    protected function mergeDatabaseConfig()
+    {
+        $default = config('database.default');
+        config(['database.connections.'.$default.'.prefix' => config('admin.database.prefix')]);
+    }
 
-		Route::group($attributes, function ($router) {
-			$router->get('login', 'Auth\LoginController@showLoginForm');
-			$router->post('login', 'Auth\LoginController@login');
-			$router->get('logout', 'Auth\LoginController@logout');
-		});
+    /**
+     * register auth route
+     * @return [type] [description]
+     */
+    protected function registerAuthRoutes()
+    {
+        $attributes        =    [
+            'prefix'        =>    config('admin.route.prefix'),
+            'namespace'        =>    'Gayly\\Leaf\\Controllers',
+            'middleware'    => 'web',
+        ];
 
-		$attributes['middleware'] = config('admin.route.middleware');
+        Route::group($attributes, function ($router) {
+            $router->get('login', 'Auth\LoginController@showLoginForm');
+            $router->post('login', 'Auth\LoginController@login');
+            $router->get('logout', 'Auth\LoginController@logout');
+        });
 
-		if (file_exists($routes = admin_path('routes.php'))) {
-			Route::prefix($attributes['prefix'])
-	             ->middleware($attributes['middleware'])
-	             ->namespace(config('admin.route.namespace'))
-	             ->group(admin_path('routes.php'));
-		}
-	}
+        $attributes['middleware'] = config('admin.route.middleware');
 
-	/**
-	 * register route middleware and groups
-	 * @return [type] [description]
-	 */
-	protected function registerMiddlewares()
-	{
-		foreach ($this->routeMiddleware as $key => $value) {
-			app('router')->aliasMiddleware($key, $value);
-		}
+        if (file_exists($routes = admin_path('routes.php'))) {
+            Route::prefix($attributes['prefix'])
+                 ->middleware($attributes['middleware'])
+                 ->namespace(config('admin.route.namespace'))
+                 ->group(admin_path('routes.php'));
+        }
+    }
 
-		foreach ($this->middlewareGroups as $key => $value) {
-			app('router')->middlewareGroup($key, $value);
-		}
-	}
+    /**
+     * register route middleware and groups
+     * @return [type] [description]
+     */
+    protected function registerMiddlewares()
+    {
+        foreach ($this->routeMiddleware as $key => $value) {
+            app('router')->aliasMiddleware($key, $value);
+        }
+
+        foreach ($this->middlewareGroups as $key => $value) {
+            app('router')->middlewareGroup($key, $value);
+        }
+    }
 }
