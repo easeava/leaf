@@ -55,15 +55,15 @@
         <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
           <img src="{{ admin_asset('vendor/leaf/assets/img/logo.png') }}" alt="logo" data-src="{{ admin_asset('vendor/leaf/assets/img/logo.png') }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/logo_2x.png') }}" width="78" height="22">
           <p class="p-t-35">统一管理面板登录页面</p>
-          @if ($errors->has('email'))
-              <span class="help-block">
-                  <strong>{{ $errors->first('email') }}</strong>
-              </span>
+          @if ($errors->has('username'))
+              <code class="help-block">
+                  <strong>{{ $errors->first('username') }}</strong>
+              </code>
           @endif
           @if ($errors->has('password'))
-              <span class="help-block">
+              <code class="help-block">
                   <strong>{{ $errors->first('password') }}</strong>
-              </span>
+              </code>
           @endif
           <!-- START Login Form -->
           <form id="form-login" class="p-t-15" role="form" action="{{ admin_base_path('login') }}" method="POST">
@@ -72,7 +72,7 @@
             <div class="form-group form-group-default">
               <label>用户名</label>
               <div class="controls">
-                <input type="text" name="email" placeholder="邮箱" class="form-control" required>
+                <input type="text" name="username" placeholder="用户名" class="form-control" required>
               </div>
             </div>
             <!-- END Form Control-->
