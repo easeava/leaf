@@ -47,7 +47,7 @@ return [
         'providers'    =>    [
             'admins'    =>    [
                 'driver'    =>    'eloquent',
-                'model'        =>    \Gayly\Leaf\Auth\Models\Leaf::class,
+                'model'        =>    \Gayly\Leaf\Auth\Models\LeafUser::class,
             ],
         ],
     ],
@@ -57,7 +57,7 @@ return [
      */
     'database'    =>    [
         'prefix'    =>  'leaf_',
-        'users_table'    =>    'leafs',
+        'users_table'    =>    'leaf_users',
         'roles_table'    =>    'roles',
         'permissions_table'    =>    'permissions',
         'menus_table'    =>    'menus',

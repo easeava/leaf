@@ -16,9 +16,14 @@ class CreateLeafTables extends Migration
         Schema::create(config('admin.database.users_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('username', 190)->unique();
+            $table->string('email', 60)->unique();
             $table->string('password', 60);
             $table->string('name');
             $table->string('avatar')->nullable();
+            $table->integer('mobile', 20);
+            $table->string('wechat', 30)->nullable();
+            $table->string('qq', 20)->nullable();
+            $table->string('status', 10)->default('normal')->comment('normal: 正常, disable: 禁用');
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
         });
@@ -46,7 +51,6 @@ class CreateLeafTables extends Migration
             $table->string('title', 50);
             $table->string('icon', 50);
             $table->string('uri', 50)->nullable();
-
             $table->timestamps();
         });
 

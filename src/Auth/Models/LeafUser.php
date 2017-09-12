@@ -5,7 +5,7 @@ namespace Gayly\Leaf\Auth\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Leaf extends Authenticatable
+class LeafUser extends Authenticatable
 {
     use Notifiable;
 
