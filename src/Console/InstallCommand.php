@@ -4,6 +4,7 @@ namespace Gayly\Leaf\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Gayly\Leaf\Auth\Models\LeafUser;
 
 class InstallCommand extends Command
 {
@@ -42,6 +43,10 @@ class InstallCommand extends Command
     protected function initInstallDatabase()
     {
         $this->call('migrate');
+
+        if (LeafUser::count() == 0) {
+            $this->call('db:seed', ['--class' => \Gayly\Leaf\Seeder\UserTableSeeder::class]);
+        }
     }
 
     protected function initInstallAdminDirectory()
