@@ -14,6 +14,7 @@ class LeafServiceProvider extends ServiceProvider
 	];
 
 	protected $routeMiddleware	=	[
+		'leaf.redirect'		=>		\Gayly\Leaf\Middleware\Redirect::class,
 		'leaf.auth'			=>		\Gayly\Leaf\Middleware\Authenticate::class,
 		'leaf.log'         	=> 		\Gayly\Leaf\Middleware\LogOperation::class,
         'leaf.permission'  	=> 		\Gayly\Leaf\Middleware\Permission::class,
@@ -76,7 +77,7 @@ class LeafServiceProvider extends ServiceProvider
 		$attributes		=	[
 			'prefix'		=>	config('admin.route.prefix'),
 			'namespace'		=>	'Gayly\\Leaf\\Controllers',
-			'middleware'	=>	config('admin.route.middleware'),
+			'middleware'	=> 'web',
 		];
 
 		Route::group($attributes, function ($router) {
@@ -84,6 +85,8 @@ class LeafServiceProvider extends ServiceProvider
 			$router->post('login', 'Auth\LoginController@login');
 			$router->get('logout', 'Auth\LoginController@logout');
 		});
+
+		$attributes['middleware'] = config('admin.route.middleware');
 
 		if (file_exists($routes = admin_path('routes.php'))) {
 			Route::prefix($attributes['prefix'])

@@ -5,7 +5,7 @@ namespace Gayly\Leaf\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Authenticate
+class Redirect
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,10 @@ class Authenticate
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = 'admin')
     {
-        if (Auth::guard('admin')->guest()) {
-            return redirect(config('admin.route.prefix') . '/login');
+        if (Auth::guard($guard)->check()) {
+            return redirect(config('admin.route.prefix'));
         }
 
         return $next($request);

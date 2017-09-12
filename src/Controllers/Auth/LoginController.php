@@ -35,7 +35,7 @@ class LoginController extends Controller
     public function __construct()
     {
 		$this->redirectTo = '';
-        $this->middleware('leaf')->except('logout');
+        $this->middleware('leaf.redirect')->except('logout');
     }
 
 	/**
