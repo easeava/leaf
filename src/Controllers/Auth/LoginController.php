@@ -46,7 +46,6 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        dd(config('database'));
         return view('leaf::auth.login');
     }
 
