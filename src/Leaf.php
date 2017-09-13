@@ -2,6 +2,7 @@
 
 namespace Gayly\Leaf;
 
+use Auth;
 use Closure;
 use Gayly\Leaf\Layout\Content;
 
@@ -23,7 +24,7 @@ class Leaf
 
     public static function script()
     {
-        
+
     }
 
     public static function css()
@@ -34,5 +35,10 @@ class Leaf
     public static function js()
     {
 
+    }
+
+    public function user()
+    {
+        return Auth::guard('admin')->user();
     }
 }

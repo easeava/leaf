@@ -40,8 +40,8 @@
 						<div class="inner">
 							<!-- START BREADCRUMB -->
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">Pages</a></li>
-								<li class="breadcrumb-item active">Blank template</li>
+								<li class="breadcrumb-item"><a href="#">默认</a></li>
+								<li class="breadcrumb-item active">首页</li>
 							</ol>
 							<!-- END BREADCRUMB -->
 						</div>

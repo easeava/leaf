@@ -136,7 +136,7 @@
 			<div class="d-flex align-items-center">
 				<!-- START User Info-->
 				<div class="pull-left p-r-10 fs-14 font-heading hidden-md-down">
-					<span class="semi-bold">David</span> <span class="">Nest</span>
+					<span class="semi-bold">{{ Leaf::user()->name }}</span> <span class=""></span>
 				</div>
 				<div class="dropdown pull-right sm-m-r-5">
 					<button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -145,11 +145,11 @@
 			  </span>
 		  </button>
 					<div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-						<a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
-						<a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
-						<a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-						<a href="#" class="clearfix bg-master-lighter dropdown-item">
-			  <span class="pull-left">Logout</span>
+						<a href="#" class="dropdown-item"><i class="pg-settings_small"></i> 设置面板 </a>
+						<a href="#" class="dropdown-item"><i class="pg-outdent"></i> 个人资料</a>
+						<a href="#" class="dropdown-item"><i class="pg-signals"></i> 帮助文档</a>
+						<a href="{{ admin_base_path('logout') }}" class="clearfix bg-master-lighter dropdown-item">
+			  <span class="pull-left">注销</span>
 			  <span class="pull-right"><i class="pg-power"></i></span>
 			</a>
 					</div>
@@ -163,7 +163,7 @@
 				<img src="{{ admin_asset('vendor/leaf/assets/img/logo_s.png') }}" alt="logo" data-src="{{ admin_asset('vendor/leaf/assets/img/logo_s.png') }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/logo_s_2x.png') }}" width="17" height="20">
 			</div>
 			<h2 class="page-title align-self-end">
-			blank
+			首页
 		  </h2>
 		</div>
 		<!-- START MENU -->
