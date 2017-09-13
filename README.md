@@ -18,7 +18,7 @@ Then run these commands to publish assets and config：
 ```
 php artisan vendor:publish --provider="Gayly\Leaf\LeafServiceProvider"
 ```
-After run command you can find config file in `config/admin.php`, in this file you can change the install directory,db connection or table names.
+After run command you can find config file in `config/admin.php`
 
 At last run following command to finish install.
 ```
