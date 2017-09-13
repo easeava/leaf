@@ -22,15 +22,15 @@ class DashController extends Controller
         $content->row(function (Row $row) {
 
             $row->column(4, function (Column $column) {
-                $column->append('1');
+                $column->append('Column 1');
             });
 
             $row->column(4, function (Column $column) {
-                $column->append('2');
+                $column->append('Column 2');
             });
 
             $row->column(4, function (Column $column) {
-                $column->append('3');
+                $column->append('Column 3');
             });
         });
 
