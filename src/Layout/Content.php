@@ -22,7 +22,7 @@ class Content implements Renderable
     /**
      * Row
      */
-    protected $row = [];
+    protected $rows = [];
 
     public function __construct(Closure $callback = null)
     {
@@ -45,12 +45,51 @@ class Content implements Renderable
         return $this;
     }
 
-    protected function addRow()
+    public function body($content)
     {
+        $this->row($content);
     }
 
+    /**
+     * add row for content body
+     * @param  [type] $content [description]
+     * @return [type]          [description]
+     */
+    public function row($content)
+    {
+        if ($content instanceof Closure) {
+            $row = new Row();
+            call_user_func($content, $row);
+            
+            $this->addRow($row);
+        } else {
+            $this->addRow(new Row($content));
+        }
+
+        return $this;
+    }
+
+    protected function addRow($content)
+    {
+        $this->rows[] = $content;
+    }
+
+    /**
+     * build html content
+     * @return [type] [description]
+     */
     public function build()
     {
+        ob_start();
+
+        foreach ($this->rows as $row) {
+            $row->build();
+        }
+
+        $contents = ob_get_contents();
+        ob_end_clean();
+
+        return $contents;
     }
 
     public function render()
