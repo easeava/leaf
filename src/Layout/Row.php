@@ -7,6 +7,8 @@ class Row implements Buildable
 
     protected $columns = [];
 
+    public $class = '';
+
     public function __construct($content = '')
     {
         if (!empty($content)) {
@@ -16,7 +18,7 @@ class Row implements Buildable
 
     public function column($num, $content, $class = '')
     {
-        $column = new Column($content, $num, $class);
+        $column = new Column($content, $num, trim($this->class, ' ') . ' ' . $class);
 
         $this->addColumn($column);
     }

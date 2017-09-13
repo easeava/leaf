@@ -13,16 +13,17 @@ class DashController extends Controller
     public function index()
     {
         return Leaf::content(function (Content $content) {
-
             $content->header('Dashboard');
+            $content->description('Description...');
 
             $content->row(function (Row $row) {
+                $row->class = 'd-flex flex-column';
 
-                $row->column(3, view('leaf::dash.column1'), 'd-flex flex-column');
+                $row->column(3, view('leaf::dash.column1'), 'col-sm-6');
 
-                $row->column(3, view('leaf::dash.column2'), 'd-flex flex-column');
+                $row->column(3, view('leaf::dash.column2'), 'col-sm-6');
 
-                $row->column(6, view('leaf::dash.column3'), 'm-b-10 d-flex flex-column');
+                $row->column(6, view('leaf::dash.column3'), 'm-b-10');
             });
         });
     }

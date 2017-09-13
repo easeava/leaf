@@ -67,9 +67,14 @@ class Column implements Buildable
         $this->endColumn();
     }
 
+    protected function getClass()
+    {
+        return $this->class ? ' ' . trim($this->class, ' ') : '';
+    }
+
     protected function startColumn()
     {
-        echo "<div class=\"col-md-{$this->num} {$this->class} \">";
+        echo "<div class=\"col-md-{$this->num}{$this->getClass()}\">";
     }
 
     protected function endColumn()
