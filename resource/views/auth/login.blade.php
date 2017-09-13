@@ -87,8 +87,8 @@
             <div class="row">
               <div class="col-md-6 no-padding sm-p-l-10">
                 <div class="checkbox ">
-                  <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">保持登录状态</label>
+                  <input type="checkbox" value="1" name="remember" id="remember">
+                  <label for="remember">保持登录状态</label>
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center justify-content-end">
@@ -107,10 +107,10 @@
               <div class="col-sm-9 no-padding m-t-10">
                 <p>
                   {{-- <small>
-									Create a pages account. If you have a facebook account, log into it for this
-									process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#"
-									                                                                       class="text-info">Google</a>
-								</small> --}}
+    					Create a pages account. If you have a facebook account, log into it for this
+    					process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#"
+    					                                                                       class="text-info">Google</a>
+    				</small> --}}
                 </p>
               </div>
             </div>
