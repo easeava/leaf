@@ -3,11 +3,17 @@
 namespace DummyNamespace;
 
 use App\Http\Controllers\Controller;
+use Gayly\Leaf\Layout\Column;
+use Gayly\Leaf\Layout\Content;
+use Gayly\Leaf\Layout\Row;
+use Leaf;
 
 class DashController extends Controller
 {
     public function index()
     {
-        return view('leaf::index');
+        return Leaf::content(function (Content $content) {
+
+        });
     }
 }
