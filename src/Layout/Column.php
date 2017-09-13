@@ -12,7 +12,9 @@ class Column implements Buildable
 
     protected $contents = [];
 
-    public function __construct($content, $num = 12)
+    protected $class = '';
+
+    public function __construct($content, $num = 12, $class = '')
     {
         if ($content instanceof Closure) {
             call_user_func($content, $this);
@@ -21,6 +23,7 @@ class Column implements Buildable
         }
 
         $this->num = $num;
+        $this->class = $class;
     }
 
     public function append($content)
@@ -66,7 +69,7 @@ class Column implements Buildable
 
     protected function startColumn()
     {
-        echo "<div class=\"col-md-{$this->num}\">";
+        echo "<div class=\"col-md-{$this->num} {$this->class} \">";
     }
 
     protected function endColumn()

@@ -12,31 +12,19 @@ class DashController extends Controller
 {
     public function index()
     {
-    return Leaf::content(function (Content $content) {
+        return Leaf::content(function (Content $content) {
 
-        $content->header('Dashboard');
-        $content->description('Description...');
+            $content->header('Dashboard');
+            $content->description('Description...');
 
-        $content->row('Leaf Console Panel');
+            $content->row(function (Row $row) {
 
-        $content->row(function (Row $row) {
+                $row->column(3, view('leaf::dash.column1'), 'd-flex flex-column');
 
-            $row->column(4, function (Column $column) {
-                $column->append('Column 1');
-            });
+                $row->column(3, view('leaf::dash.column2'), 'd-flex flex-column');
 
-            $row->column(4, function (Column $column) {
-                $column->append('Column 2');
-            });
-
-            $row->column(4, function (Column $column) {
-                $column->append('Column 3');
+                $row->column(6, view('leaf::dash.column3'), 'm-b-10 d-flex flex-column');
             });
         });
-
-        $html = <<<HTML
-            <a href="#">我是一个超链接</a>
-HTML;
-        $content->row($html);
     }
 }

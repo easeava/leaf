@@ -45,8 +45,7 @@
 							<!-- BEGIN Search Result Item Thumbnail !-->
 							<div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
 								<div>
-									<img width="50" height="50" src="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar.jpg') }}" data-src="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar.jpg') }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar2x.jpg') }}"
-									    alt="">
+									<img width="50" height="50" src="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar.jpg') }}" data-src="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar.jpg') }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar2x.jpg') }}" alt="">
 								</div>
 							</div>
 							<!-- END Search Result Item Thumbnail !-->

@@ -14,9 +14,9 @@ class Row implements Buildable
         }
     }
 
-    public function column($num, $content)
+    public function column($num, $content, $class = '')
     {
-        $column = new Column($content, $num);
+        $column = new Column($content, $num, $class);
 
         $this->addColumn($column);
     }

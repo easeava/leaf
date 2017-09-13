@@ -145,10 +145,10 @@
 			  </span>
 		  </button>
 					<div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-						<a href="#" class="dropdown-item"><i class="pg-settings_small"></i> 设置面板 </a>
+						<a href="#" class="dropdown-item"><i class="pg-settings_small"></i> 设置中心</a>
 						<a href="#" class="dropdown-item"><i class="pg-outdent"></i> 个人资料</a>
 						<a href="#" class="dropdown-item"><i class="pg-signals"></i> 帮助文档</a>
-						<a href="{{ admin_url('logout') }}" class="clearfix bg-master-lighter dropdown-item">
+						<a href="{{ admin_base_path('logout') }}" class="clearfix bg-master-lighter dropdown-item">
 			  <span class="pull-left">注销</span>
 			  <span class="pull-right"><i class="pg-power"></i></span>
 			</a>
@@ -166,9 +166,7 @@
 			{{ $header or config('admin.title') }}
 		  </h2>
 		</div>
-		<!-- START MENU -->
 		@include('leaf::layouts.menu')
-		<!-- END MENU -->
 	</div>
 </div>
 <!-- END HEADER -->

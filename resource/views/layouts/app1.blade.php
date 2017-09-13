@@ -39,21 +39,21 @@
 	<div class="page-container ">
 		<!-- START PAGE CONTENT WRAPPER -->
 		<div class="page-content-wrapper ">
-			<!-- START PAGE CONTENT -->
-			<div class="content sm-gutter">
-				<!-- START JUMBOTRON -->
-				<div data-pages="parallax">
-					<div class=" container no-padding    container-fixed-lg">
-						<div class="inner">
-							<!-- START BREADCRUMB -->
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">默认</a></li>
-								<li class="breadcrumb-item active">首页</li>
-							</ol>
+				<!-- START PAGE CONTENT -->
+				<div class="content sm-gutter">
+					<!-- START JUMBOTRON -->
+	          		<div data-pages="parallax">
+						<div class=" container no-padding    container-fixed-lg">
+							<div class="inner">
+								<!-- START BREADCRUMB -->
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">默认</a></li>
+									<li class="breadcrumb-item active">首页</li>
+								</ol>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- END JUMBOTRON -->
+	          		<!-- END JUMBOTRON -->
 				<!-- START CONTAINER FLUID -->
 				<div class="container sm-padding-10 no-padding">
 					@yield('content')
@@ -66,7 +66,6 @@
 		<!-- END PAGE CONTENT WRAPPER -->
 	</div>
 	<!-- END PAGE CONTAINER -->
-
 	@include('leaf::layouts.quickview')
 	@include('leaf::layouts.overlay')
 	<!-- BEGIN VENDOR JS -->
