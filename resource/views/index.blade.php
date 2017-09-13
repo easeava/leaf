@@ -4,6 +4,8 @@
 <head>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 	<meta charset="utf-8" />
+	<!-- CSRF Token -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Pages - Admin Dashboard UI Kit - Blank Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
 	<link rel="apple-touch-icon" href="{{ admin_asset('vendor/leaf/pages/ico/60.png') }}">
@@ -25,6 +27,10 @@
 	{!! Leaf::css() !!}
 	<link href="{{ admin_asset('vendor/leaf/pages/css/pages-icons.css') }}" rel="stylesheet" type="text/css">
 	<link class="main-stylesheet" href="{{ admin_asset('vendor/leaf/pages/css/pages.css') }}" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		let LEAF = function () {}
+		LEAF.token = "{{ csrf_token() }}";
+	</script>
 </head>
 
 <body class="fixed-header horizontal-menu horizontal-app-menu ">
