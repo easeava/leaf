@@ -34,42 +34,39 @@
 </head>
 
 <body class="fixed-header horizontal-menu horizontal-app-menu ">
-	@include('leaf::partials.header')
+	@include('leaf::layouts.header')
 	<div class="page-container ">
 		<!-- START PAGE CONTENT WRAPPER -->
 		<div class="page-content-wrapper ">
-			<!-- START PAGE CONTENT -->
-			<div class="content ">
-				<!-- START JUMBOTRON -->
-				<div class="jumbotron">
-					<div class=" container p-l-0 p-r-0   container-fixed-lg sm-p-l-0 sm-p-r-0">
-						<div class="inner">
-							<!-- START BREADCRUMB -->
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">默认</a></li>
-								<li class="breadcrumb-item active">首页</li>
-							</ol>
-							<!-- END BREADCRUMB -->
+				<!-- START PAGE CONTENT -->
+				<div class="content sm-gutter">
+					<!-- START JUMBOTRON -->
+	          		<div data-pages="parallax">
+						<div class=" container no-padding    container-fixed-lg">
+							<div class="inner">
+								<!-- START BREADCRUMB -->
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="#">默认</a></li>
+									<li class="breadcrumb-item active">首页</li>
+								</ol>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- END JUMBOTRON -->
+	          		<!-- END JUMBOTRON -->
 				<!-- START CONTAINER FLUID -->
-				<div class=" container    container-fixed-lg">
-					<!-- BEGIN PlACE PAGE CONTENT HERE -->
+				<div class="container sm-padding-10 no-padding">
 					@yield('content')
-					<!-- END PLACE PAGE CONTENT HERE -->
 				</div>
 				<!-- END CONTAINER FLUID -->
 			</div>
 			<!-- END PAGE CONTENT -->
-			@include('leaf::partials.footer')
+			@include('leaf::layouts.footer')
 		</div>
 		<!-- END PAGE CONTENT WRAPPER -->
 	</div>
 	<!-- END PAGE CONTAINER -->
-	@include('leaf::partials.quickview')
-	@include('leaf::partials.overlay')
+	@include('leaf::layouts.quickview')
+	@include('leaf::layouts.overlay')
 	<!-- BEGIN VENDOR JS -->
 	<script src="{{ admin_asset('vendor/leaf/assets/plugins/feather-icons/feather.min.js') }}" type="text/javascript"></script>
 	<script src="{{ admin_asset('vendor/leaf/assets/plugins/pace/pace.min.js') }}" type="text/javascript"></script>

@@ -163,11 +163,11 @@
 				<img src="{{ admin_asset('vendor/leaf/assets/img/logo_s.png') }}" alt="logo" data-src="{{ admin_asset('vendor/leaf/assets/img/logo_s.png') }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/logo_s_2x.png') }}" width="17" height="20">
 			</div>
 			<h2 class="page-title align-self-end">
-			首页
+			{{ $header or config('admin.title') }}
 		  </h2>
 		</div>
 		<!-- START MENU -->
-		@include('leaf::partials.menu')
+		@include('leaf::layouts.menu')
 		<!-- END MENU -->
 	</div>
 </div>
