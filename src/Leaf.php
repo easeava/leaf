@@ -21,6 +21,11 @@ class Leaf
         return config('admin.title');
     }
 
+    public static function script()
+    {
+        
+    }
+
     public static function css()
     {
 
