@@ -13,7 +13,24 @@ class DashController extends Controller
     public function index()
     {
         return Leaf::content(function (Content $content) {
+            $content->header('Dashboard');
+            $content->description('Description...');
 
+            $content->row('Leaf Console Panel');
+
+            $content->row(function (Row $row) {
+                $row->column(4, function (Column $column) {
+                    $column->append('1');
+                });
+
+                $row->column(4, function (Column $column) {
+                    $column->append('2');
+                });
+
+                $row->column(4, function (Column $column) {
+                    $column->append('3');
+                });
+            });
         });
     }
 }
