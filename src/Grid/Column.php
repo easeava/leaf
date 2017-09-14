@@ -12,6 +12,8 @@ class Column
 
 	protected $label;
 
+	protected static $model;
+
 	public function __construct($name, $label)
 	{
 		$this->name = $name;

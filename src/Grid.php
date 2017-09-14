@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Gayly\Leaf\Grid\Column;
+use Gayly\Leaf\Grid\Model;
 
 class Grid
 {
@@ -33,11 +34,16 @@ class Grid
 
 	public function __construct(Eloquent $model, Closure $builder)
 	{
-		$this->model = $model;
+		$this->model = new Model($model);
 		$this->keyName = $model->getKeyName();
 		$this->columns = new Collection();
 		$this->rows = new Collection();
 		$this->builder = $builder;
+	}
+
+	public function model()
+	{
+		return $this->model;
 	}
 
 	protected function addColumn($column = '', $label = '')
@@ -118,13 +124,13 @@ class Grid
 
 	public function __call($method, $argments)
 	{
-		// $label = isset($arguments[0]) ? $arguments[0] : ucfirst($method);
+		$label = isset($arguments[0]) ? $arguments[0] : ucfirst($method);
 		//
 		// if ($column = $this->handleTableColumn($method, $label)) {
         //     return $column;
         // }
-		dump($method);
-        // return $this->addColumn($method, $label);
+		// dump($method);
+        return $this->addColumn($method, $label);
 	}
 
 	public function __toString()
