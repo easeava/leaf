@@ -90,6 +90,25 @@ class Grid
         return $column;
     }
 
+	public function columns($columns = [])
+    {
+        if (func_num_args() == 0) {
+            return $this->columns;
+        }
+
+        if (func_num_args() == 1 && is_array($columns)) {
+            foreach ($columns as $column => $label) {
+                $this->column($column, $label);
+            }
+
+            return;
+        }
+
+        foreach (func_get_args() as $column) {
+            $this->column($column);
+        }
+    }
+
     /**
      * Handle table column for grid.
      *
