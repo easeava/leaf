@@ -4,6 +4,13 @@ namespace Gayly\Leaf\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Gayly\Leaf\Layout\Column;
+use Gayly\Leaf\Layout\Content;
+use Gayly\Leaf\Layout\Row;
+use Gayly\Leaf\Grid;
+use Leaf;
+use Illuminate\Database\Eloquent\Model;
+use Gayly\Leaf\Auth\Models\LeafUser;
 
 class UserController extends Controller
 {
@@ -12,9 +19,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(\Gayly\Leaf\Auth\Models\LeafUser $user)
     {
-        //
+        return Leaf::content(function (Content $content) {
+			$content->header('用户列表');
+			$content->row($this->grid());
+		});
     }
 
     /**
@@ -82,4 +92,12 @@ class UserController extends Controller
     {
         //
     }
+
+	protected function grid()
+	{
+		return Leaf::grid(LeafUser::class, function (Grid $grid) {
+            $grid->id('ID');
+			$grid->name('昵称');
+        });
+	}
 }

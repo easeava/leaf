@@ -60,7 +60,7 @@ class Content implements Renderable
         if ($content instanceof Closure) {
             $row = new Row();
             call_user_func($content, $row);
-            
+
             $this->addRow($row);
         } else {
             $this->addRow(new Row($content));

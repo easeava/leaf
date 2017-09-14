@@ -5,8 +5,9 @@ namespace Gayly\Leaf;
 use Auth;
 use Closure;
 use Gayly\Leaf\Layout\Content;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Gayly\Leaf\Auth\Models\Menu;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class Leaf
 {
@@ -27,12 +28,12 @@ class Leaf
 
     public function getModel($model)
     {
-        if ($model instanceof Model) {
+        if ($model instanceof EloquentModel) {
             return $model;
         }
 
         if (is_string($model) && class_exists($model)) {
-            return $this->getModel($model);
+            return $this->getModel(new $model());
         }
 
         throw new InvalidArgumentException("$model is not a vali model");
