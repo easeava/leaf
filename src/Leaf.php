@@ -53,13 +53,7 @@ class Leaf
 
     public static function css()
     {
-        if (!is_null($css)) {
-            self::$css = array_merge(self::$css, (array) $css);
 
-            return;
-        }
-
-        return view('admin::partials.css', ['css' => array_unique(static::$css)]);
     }
 
     public static function js()
