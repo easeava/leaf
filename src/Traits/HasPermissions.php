@@ -21,7 +21,7 @@ trait HasPermissions
             return Storage::disk(config('admin.upload.disk'))->url($avatar);
         }
 
-        return admin_asset('/vendor/leaf/assets/img/profiles/avatar.jpg');
+        return admin_asset('/vendor/leaf/assets/img/profiles/1.png');
     }
 
     /**

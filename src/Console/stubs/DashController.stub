@@ -13,7 +13,7 @@ class DashController extends Controller
     public function index()
     {
         return Leaf::content(function (Content $content) {
-            $content->header('Dashboard');
+            $content->header('控制面板');
 
             $content->row(function (Row $row) {
                 $row->class = 'd-flex flex-column';

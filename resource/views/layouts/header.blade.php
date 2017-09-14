@@ -131,7 +131,7 @@
 					</li>
 				</ul>
 				<!-- END NOTIFICATIONS LIST -->
-				<a href="#" class="search-link hidden-md-down" data-toggle="search"><i class="pg-search"></i>Type anywhere to <span class="bold">search</span></a>
+				<a href="#" class="search-link hidden-md-down" data-toggle="search"><i class="pg-search"></i> <span class="bold">Search</span></a>
 			</div>
 			<div class="d-flex align-items-center">
 				<!-- START User Info-->
@@ -141,7 +141,7 @@
 				<div class="dropdown pull-right sm-m-r-5">
 					<button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<span class="thumbnail-wrapper d32 circular inline">
-			  <img src="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar.jpg') }}" alt="" data-src="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar.jpg') }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar_small2x.jpg') }}" width="32" height="32">
+			  <img src="{{ Leaf::user()->avatar }}" alt="" data-src="{{ Leaf::user()->avatar }}" data-src-retina="{{ admin_asset('vendor/leaf/assets/img/profiles/avatar_small2x.jpg') }}" width="32" height="32">
 			  </span>
 		  </button>
 					<div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
@@ -171,7 +171,7 @@
 		</a>
 			<ul>
 				@each('leaf::layouts.menu', Leaf::menu(), 'item')
-				
+
 				<li></li>
 			</ul>
 			<a href="#" class="search-link d-flex justify-content-between align-items-center hidden-lg-up" data-toggle="search">Tap here to search <i class="pg-search float-right"></i></a>

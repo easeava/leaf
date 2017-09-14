@@ -62,6 +62,10 @@ class Leaf
 
     }
 
+    /**
+     * [user description]
+     * @return [type] [description]
+     */
     public function user()
     {
         return Auth::guard('admin')->user();
