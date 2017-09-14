@@ -166,7 +166,17 @@
 			{{ $header or config('admin.title') }}
 		  </h2>
 		</div>
-		@include('leaf::layouts.menu')
+		<div class="menu-bar header-sm-height" data-pages-init='horizontal-menu' data-hide-extra-li="4">
+			<a href="#" class="btn-link toggle-sidebar hidden-lg-up pg pg-close" data-toggle="horizontal-menu">
+		</a>
+			<ul>
+				@each('leaf::layouts.menu', Leaf::menu(), 'item')
+				
+				<li></li>
+			</ul>
+			<a href="#" class="search-link d-flex justify-content-between align-items-center hidden-lg-up" data-toggle="search">Tap here to search <i class="pg-search float-right"></i></a>
+		</div>
+
 	</div>
 </div>
 <!-- END HEADER -->

@@ -3,11 +3,14 @@
 namespace Gayly\Leaf\Auth\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Model;
+use Gayly\Leaf\Traits\HasPermissions;
 
-class LeafUser extends Authenticatable
+class LeafUser extends Model implements AuthenticatableContract
 {
-    use Notifiable;
+    use Authenticatable, Notifiable, HasPermissions;
 
     /**
      * The attributes that are mass assignable.

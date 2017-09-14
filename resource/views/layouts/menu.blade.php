@@ -1,32 +1,23 @@
-<div class="menu-bar header-sm-height" data-pages-init='horizontal-menu' data-hide-extra-li="4">
-	<a href="#" class="btn-link toggle-sidebar hidden-lg-up pg pg-close" data-toggle="horizontal-menu">
-</a>
-	<ul>
+@if(Leaf::user()->visible($item['roles']))
+    @if(!isset($item['children']))
 		<li>
-			<a href="">首页</a>
+			@if(url()->isValidUrl($item['uri']))
+                <a href="{{ $item['uri'] }}" target="_blank">
+            @else
+                 <a href="{{ admin_base_path($item['uri']) }}">
+            @endif
+                <span class="title">{{ $item['title'] }}</span>
+            </a>
 		</li>
-		{{-- <li>
-			<a href="social.html"><span class="title">Social</span></a>
-		</li>
+	@else
 		<li>
-			<a href="javascript:;"><span class="title">Calendar</span>
-<span class=" arrow"></span></a>
+			<a href="javascript:;"><span class="title">{{ $item['title'] }}</span>
+		<span class=" arrow"></span></a>
 			<ul class="">
-				<li class="">
-					<a href="calendar.html">Basic</a>
-				</li>
-				<li class="">
-					<a href="calendar_lang.html">Languages</a>
-				</li>
-				<li class="">
-					<a href="calendar_month.html">Month</a>
-				</li>
-				<li class="">
-					<a href="calendar_lazy.html">Lazy load</a>
-				</li>
+				@foreach($item['children'] as $item)
+                    @include('leaf::layouts.menu', $item)
+                @endforeach
 			</ul>
-		</li> --}}
-		<li></li>
-	</ul>
-	<a href="#" class="search-link d-flex justify-content-between align-items-center hidden-lg-up" data-toggle="search">Tap here to search <i class="pg-search float-right"></i></a>
-</div>
+		</li>
+	@endif
+@endif

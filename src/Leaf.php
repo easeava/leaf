@@ -6,6 +6,7 @@ use Auth;
 use Closure;
 use Gayly\Leaf\Layout\Content;
 use Illuminate\Database\Eloquent\Model;
+use Gayly\Leaf\Auth\Models\Menu;
 
 class Leaf
 {
@@ -64,5 +65,10 @@ class Leaf
     public function user()
     {
         return Auth::guard('admin')->user();
+    }
+
+    public function menu()
+    {
+        return (new Menu())->toTree();
     }
 }

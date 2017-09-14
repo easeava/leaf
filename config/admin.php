@@ -59,13 +59,15 @@ return [
         'prefix'    =>  'leaf_',
         'users_table'    =>    'leaf_users',
         'roles_table'    =>    'roles',
+        'roles_model'   =>  Gayly\Leaf\Auth\Models\Role::class,
         'permissions_table'    =>    'permissions',
+        'permissions_model' =>  Gayly\Leaf\Auth\Models\Permission::class,
         'menus_table'    =>    'menus',
         'operation_log_table'    => 'operation_log',
         'user_permissions_table' => 'user_permissions',
         'role_users_table'       => 'role_users',
         'role_permissions_table' => 'role_permissions',
-        'role_menu_table'        => 'role_menu',
+        'role_menu_table'        => 'role_menus',
     ],
 
     /**

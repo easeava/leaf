@@ -92,6 +92,15 @@ class LeafServiceProvider extends ServiceProvider
         ];
 
         Route::group($attributes, function ($router) {
+
+            $router->group([], function ($router) {
+                $router->resource('auth/users', 'UserController');
+                $router->resource('auth/roles', 'RoleController');
+                $router->resource('auth/permissions', 'PermissionController');
+                $router->resource('auth/menus', 'MenuController', ['except' => ['create']]);
+                $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']]);
+            });
+
             $router->get('login', 'Auth\LoginController@showLoginForm');
             $router->post('login', 'Auth\LoginController@login');
             $router->get('logout', 'Auth\LoginController@logout');
