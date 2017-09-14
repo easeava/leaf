@@ -165,7 +165,7 @@ class Grid
         return view($this->view, $this->variables())->render();
 	}
 
-	public function __call($method, $argments)
+	public function __call($method, $arguments)
 	{
 		$label = isset($arguments[0]) ? $arguments[0] : ucfirst($method);
 		//

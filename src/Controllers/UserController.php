@@ -98,6 +98,11 @@ class UserController extends Controller
 		return Leaf::grid(LeafUser::class, function (Grid $grid) {
             $grid->id('ID');
 			$grid->name('昵称');
+            $grid->email('邮箱');
+            $grid->mobile('手机');
+            $grid->wechat('微信');
+            $grid->qq('QQ');
+            
         });
 	}
 }
