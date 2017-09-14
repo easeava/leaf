@@ -66,6 +66,30 @@ class Grid
         $this->dbColumns = collect(Schema::connection($connection)->getColumnListing($this->model()->getTable()));
     }
 
+	public function column($name, $label = '')
+    {
+        $relationName = $relationColumn = '';
+
+        if (strpos($name, '.') !== false) {
+            list($relationName, $relationColumn) = explode('.', $name);
+
+            $relation = $this->model()->eloquent()->$relationName();
+
+            $label = empty($label) ? ucfirst($relationColumn) : $label;
+
+            $name = snake_case($relationName).'.'.$relationColumn;
+        }
+
+        $column = $this->addColumn($name, $label);
+
+        if (isset($relation) && $relation instanceof Relation) {
+            $this->model()->with($relationName);
+            $column->setRelation($relationName, $relationColumn);
+        }
+
+        return $column;
+    }
+
     /**
      * Handle table column for grid.
      *
