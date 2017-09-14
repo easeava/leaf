@@ -102,7 +102,7 @@ class UserController extends Controller
             $grid->mobile('手机');
             $grid->wechat('微信');
             $grid->qq('QQ');
-            
+
         });
 	}
 }

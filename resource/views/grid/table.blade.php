@@ -1,5 +1,5 @@
 <!-- START card -->
-<div class="card card-transparent">
+<div class="card social-card share  full-width m-b-10 no-border">
 	<div class="card-header ">
 		<div class="card-title">
 			列表展示

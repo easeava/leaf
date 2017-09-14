@@ -11,6 +11,12 @@ use Illuminate\Contracts\Auth\Authenticatable;
 
 class Leaf
 {
+    protected static $script = [];
+
+    protected static $css = [];
+
+    protected static $js = [];
+
     public function content(Closure $callable)
     {
         return new Content($callable);
@@ -48,19 +54,45 @@ class Leaf
         return config('admin.title');
     }
 
-    public static function script()
+    public static function script($script = '')
     {
+        if (!empty($script)) {
+            self::$script = array_merge(self::$script, (array) $script);
 
+            return;
+        }
+
+        return view('leaf::layouts.script', ['script' => array_unique(self::$script)]);
     }
 
-    public static function css()
+    public static function css($css = null)
     {
+        if (!is_null($css)) {
+            self::$css = array_merge(self::$css, (array) $css);
 
+            return;
+        }
+
+        //  $css = array_get(Form::collectFieldAssets(), 'css', []);
+
+        static::$css = array_merge(static::$css, (array) $css);
+
+        return view('leaf::layouts.css', ['css' => array_unique(static::$css)]);
     }
 
-    public static function js()
+    public static function js($js = null)
     {
+        if (!is_null($js)) {
+            self::$js = array_merge(self::$js, (array) $js);
 
+            return;
+        }
+
+        // $js = array_get(Form::collectFieldAssets(), 'js', []);
+
+        static::$js = array_merge(static::$js, (array) $js);
+
+        return view('leaf::layouts.js', ['js' => array_unique(static::$js)]);
     }
 
     /**
