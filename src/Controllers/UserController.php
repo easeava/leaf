@@ -23,6 +23,8 @@ class UserController extends Controller
     {
         return Leaf::content(function (Content $content) {
 			$content->header('用户列表');
+            $content->setBeforeBuild('<div class="no-padding container-fixed-lg bg-white"><div class="container">');
+            $content->setAfterBuild('</div></div>');
 			$content->row($this->grid());
 		});
     }

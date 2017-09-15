@@ -19,6 +19,12 @@ class Content implements Renderable
      */
     protected $description = '';
 
+    protected $item;
+
+    protected $beforeBuild = '<div class="container no-padding container-fixed-lg">';
+
+    protected $afterBuild = '</div>';
+
     /**
      * Row
      */
@@ -41,6 +47,13 @@ class Content implements Renderable
     public function description(String $description = '')
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function item($item)
+    {
+        $this->item = $item;
 
         return $this;
     }
@@ -74,6 +87,26 @@ class Content implements Renderable
         $this->rows[] = $content;
     }
 
+    public function setBeforeBuild($beforeBuild = '')
+    {
+        $this->beforeBuild = $beforeBuild;
+    }
+
+    public function setAfterBuild($afterBuild = '')
+    {
+        $this->afterBuild = $afterBuild;
+    }
+
+    protected function beforeBuild()
+    {
+        echo $this->beforeBuild;
+    }
+
+    protected function afterBuild()
+    {
+        echo $this->afterBuild;
+    }
+
     /**
      * build html content
      * @return [type] [description]
@@ -81,11 +114,11 @@ class Content implements Renderable
     public function build()
     {
         ob_start();
-
+        $this->beforeBuild();
         foreach ($this->rows as $row) {
             $row->build();
         }
-
+        $this->afterBuild();
         $contents = ob_get_contents();
         ob_end_clean();
 
@@ -97,6 +130,7 @@ class Content implements Renderable
         $items = [
             'header'        =>    $this->header,
             'description'    =>    $this->description,
+            'item'          =>      $this->item,
             'content'        =>    $this->build(),
         ];
 

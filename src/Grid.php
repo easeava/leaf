@@ -10,43 +10,72 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Gayly\Leaf\Grid\Column;
 use Gayly\Leaf\Grid\Model;
+use Gayly\Leaf\Grid\Filter;
 
 class Grid
 {
+    protected $model;
 
-	protected $model;
+    protected $columns;
 
-	protected $columns;
+    protected $dbColumns;
 
-	protected $dbColumns;
+    protected $rows;
 
-	protected $rows;
+    protected $keyName = 'id';
 
-	protected $keyName = 'id';
+    protected $builder;
 
-	protected $builder;
+    protected $builded = false;
 
-	protected $builded = false;
+    protected $variables = [];
 
-	protected $variables = [];
+    protected $filter;
 
-   protected $view = 'leaf::grid.table';
+    protected $view = 'leaf::grid.table';
 
-	public function __construct(Eloquent $model, Closure $builder)
-	{
-		$this->model = new Model($model);
-		$this->keyName = $model->getKeyName();
-		$this->columns = new Collection();
-		$this->rows = new Collection();
-		$this->builder = $builder;
-	}
+    protected $options = [
+        'usePagination'     => true,
+        'useFilter'         => true,
+        'useExporter'       => true,
+        'useActions'        => true,
+        'useRowSelector'    => true,
+        'allowCreate'       => true,
+    ];
 
-	public function model()
-	{
-		return $this->model;
-	}
+    public function __construct(Eloquent $model, Closure $builder)
+    {
+        $this->model = new Model($model);
+        $this->keyName = $model->getKeyName();
+        $this->columns = new Collection();
+        $this->rows = new Collection();
+        $this->builder = $builder;
 
-	protected function addColumn($column = '', $label = '')
+        $this->setupFilter();
+    }
+
+    protected function setupFilter()
+    {
+		$this->filter = new Filter($this->model());
+    }
+
+    public function option($key, $value = null)
+    {
+        if (is_null($value)) {
+            return $this->options[$key];
+        }
+
+        $this->options[$key] = $value;
+
+        return $this;
+    }
+
+    public function model()
+    {
+        return $this->model;
+    }
+
+    protected function addColumn($column = '', $label = '')
     {
         $column = new Column($column, $label);
         $column->setGrid($this);
@@ -54,7 +83,7 @@ class Grid
         return $this->columns[] = $column;
     }
 
-	/**
+    /**
      * Get the table columns for grid.
      *
      * @return void
@@ -66,7 +95,7 @@ class Grid
         $this->dbColumns = collect(Schema::connection($connection)->getColumnListing($this->model()->getTable()));
     }
 
-	public function column($name, $label = '')
+    public function column($name, $label = '')
     {
         $relationName = $relationColumn = '';
 
@@ -90,7 +119,7 @@ class Grid
         return $column;
     }
 
-	public function columns($columns = [])
+    public function columns($columns = [])
     {
         if (func_num_args() == 0) {
             return $this->columns;
@@ -130,54 +159,68 @@ class Grid
         return false;
     }
 
-	public function processFilter()
+    public function processFilter()
     {
         call_user_func($this->builder, $this);
         // return $this->filter->execute();
     }
 
-	protected function variables()
+    public function filter(Closure $callback)
+    {
+        call_user_func($callback, $this->filter);
+    }
+
+    public function renderFilter()
+    {
+        if (!$this->option('useFilter')) {
+            return '';
+        }
+
+        return $this->filter->render();
+    }
+
+    protected function variables()
     {
         $this->variables['grid'] = $this;
 
         return $this->variables;
     }
 
-	public function build()
-	{
-		// if ($this->builded) {
-		// 	return;
-		// }
+    public function build()
+    {
+        // if ($this->builded) {
+        // 	return;
+        // }
 
-		$this->processFilter();
+        $this->processFilter();
 
-		// $this->builded = true;
-	}
+        // $this->builded = true;
+    }
 
-	public function render()
-	{
-		try {
+    public function render()
+    {
+        try {
             $this->build();
         } catch (\Exception $e) {
             return Handler::renderException($e);
         }
 
         return view($this->view, $this->variables())->render();
-	}
+    }
 
-	public function __call($method, $arguments)
-	{
-		$label = isset($arguments[0]) ? $arguments[0] : ucfirst($method);
-		//
-		// if ($column = $this->handleTableColumn($method, $label)) {
+    public function __call($method, $arguments)
+    {
+        $label = isset($arguments[0]) ? $arguments[0] : ucfirst($method);
+        //
+        // if ($column = $this->handleTableColumn($method, $label)) {
         //     return $column;
         // }
-		// dump($method);
+        // dump($method);
         return $this->addColumn($method, $label);
-	}
+    }
 
-	public function __toString()
-	{
-		return $this->render();
-	}
+    public function __toString()
+    {
+        return $this->render();
+    }
 }

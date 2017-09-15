@@ -34,7 +34,7 @@
 	</script>
 </head>
 
-<body class="fixed-header horizontal-menu horizontal-app-menu dashboard">
+<body class="fixed-header horizontal-menu horizontal-app-menu {{ $item['body-class'] or '' }}">
 	@include('leaf::layouts.header')
 	<div class="page-container ">
 		<!-- START PAGE CONTENT WRAPPER -->
@@ -42,8 +42,8 @@
 			<!-- START PAGE CONTENT -->
 			<div class="content sm-gutter">
 				<!-- START JUMBOTRON -->
-				<div data-pages="parallax">
-					<div class=" container no-padding    container-fixed-lg">
+				<div data-pages="parallax" class="{{ $item['jumbotron-class'] or 'jumbotron' }}">
+					<div class="container no-padding container-fixed-lg">
 						<div class="inner">
 							<!-- START BREADCRUMB -->
 							<ol class="breadcrumb">
@@ -55,9 +55,8 @@
 				</div>
 				<!-- END JUMBOTRON -->
 				<!-- START CONTAINER FLUID -->
-				<div class="container sm-padding-10 no-padding">
-					@yield('content')
-				</div>
+				@yield('content')
+			
 				<!-- END CONTAINER FLUID -->
 			</div>
 			<!-- END PAGE CONTENT -->
