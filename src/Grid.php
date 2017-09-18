@@ -75,6 +75,13 @@ class Grid
         return $this->model;
     }
 
+    public function disableFilter()
+    {
+        $this->option('useFilter', false);
+
+        return $this;
+    }
+
     protected function addColumn($column = '', $label = '')
     {
         $column = new Column($column, $label);

@@ -11,6 +11,7 @@ use Gayly\Leaf\Grid;
 use Leaf;
 use Illuminate\Database\Eloquent\Model;
 use Gayly\Leaf\Auth\Models\LeafUser;
+use Gayly\Leaf\Grid\Filter;
 
 class UserController extends Controller
 {
@@ -104,7 +105,10 @@ class UserController extends Controller
             $grid->mobile('手机');
             $grid->wechat('微信');
             $grid->qq('QQ');
-
+            $grid->disableFilter();
+            $grid->filter(function (Filter $filter) {
+                $filter->like('name');
+            });
         });
 	}
 }
